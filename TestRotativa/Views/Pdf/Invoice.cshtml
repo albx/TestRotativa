@@ -1,0 +1,78 @@
+﻿@model TestRotativa.Models.Pdf.InvoiceViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Invoice @Model.Number</title>
+</head>
+<body>
+    <div class="supplier">
+        <p>
+            <strong>@Model.Supplier.Name</strong>
+        </p>
+        <p>
+            @Model.Supplier.Address.Address<br />
+            @Model.Supplier.Address.PostalCode, @Model.Supplier.Address.City (@Model.Supplier.Address.Province)
+        </p>
+        <dl>
+            <dt>Partita IVA</dt>
+            <dd>@Model.Supplier.VatNumber</dd>
+            <dt>Codice fiscale</dt>
+            <dd>@Model.Supplier.NationalIdentificationNumber</dd>
+        </dl>
+    </div>
+    <div class="customer">
+        <p>
+            <strong>@Model.Customer.Name</strong>
+        </p>
+        <p>
+            @Model.Customer.Address.Address<br />
+            @Model.Customer.Address.PostalCode, @Model.Customer.Address.City (@Model.Customer.Address.Province)
+        </p>
+        <dl>
+            <dt>Partita IVA</dt>
+            <dd>@Model.Customer.VatNumber</dd>
+            <dt>Codice fiscale</dt>
+            <dd>@Model.Customer.NationalIdentificationNumber</dd>
+        </dl>
+    </div>
+    <div class="invoice-info">
+        <dl>
+            <dt>Data di emissione</dt>
+            <dd>@Model.Date.ToString("dd/MM/yyyy")</dd>
+            <dt>Fattura numero</dt>
+            <dd>@Model.Number</dd>
+        </dl>
+    </div>
+    <table class="line-items">
+        <thead>
+            <tr>
+                <th>Cod.</th>
+                <th>Descrizione</th>
+                <th>Q.ta</th>
+                <th>Prezzo unitario</th>
+                <th>Prezzo totale</th>
+                <th>Tasse</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var lineItem in Model.LineItems)
+            {
+            <tr>
+                <td>@lineItem.Code</td>
+                <td>@lineItem.Description</td>
+                <td>@lineItem.Quantity</td>
+                <td>@lineItem.UnitPrice</td>
+                <td>@lineItem.TotalPrice</td>
+                <td>@lineItem.Vat %</td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

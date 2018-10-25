@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Rotativa.AspNetCore;
+using TestRotativa.Acl;
 
 namespace TestRotativa
 {
@@ -31,8 +33,10 @@ namespace TestRotativa
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
+            services.AddHttpClient();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.AddTransient<IPdfPrinter, RotativaPdfPrinter>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,6 +62,8 @@ namespace TestRotativa
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            //RotativaConfiguration.Setup(env);
         }
     }
 }
