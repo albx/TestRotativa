@@ -7,72 +7,102 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Invoice @Model.Number</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
 </head>
 <body>
-    <div class="supplier">
-        <p>
-            <strong>@Model.Supplier.Name</strong>
-        </p>
-        <p>
-            @Model.Supplier.Address.Address<br />
-            @Model.Supplier.Address.PostalCode, @Model.Supplier.Address.City (@Model.Supplier.Address.Province)
-        </p>
-        <dl>
-            <dt>Partita IVA</dt>
-            <dd>@Model.Supplier.VatNumber</dd>
-            <dt>Codice fiscale</dt>
-            <dd>@Model.Supplier.NationalIdentificationNumber</dd>
-        </dl>
+    <div class="supplier row">
+        <div class="col-xs-12">
+            <p>
+                <strong>@Model.Supplier.Name</strong>
+            </p>
+            <address>
+                @Model.Supplier.Address.Address<br />
+                @Model.Supplier.Address.PostalCode, @Model.Supplier.Address.City (@Model.Supplier.Address.Province)
+            </address>
+            <dl class="dl-horizontal">
+                <dt>Partita IVA</dt>
+                <dd>@Model.Supplier.VatNumber</dd>
+                <dt>Codice fiscale</dt>
+                <dd>@Model.Supplier.NationalIdentificationNumber</dd>
+            </dl>
+        </div>
     </div>
-    <div class="customer">
-        <p>
-            <strong>@Model.Customer.Name</strong>
-        </p>
-        <p>
-            @Model.Customer.Address.Address<br />
-            @Model.Customer.Address.PostalCode, @Model.Customer.Address.City (@Model.Customer.Address.Province)
-        </p>
-        <dl>
-            <dt>Partita IVA</dt>
-            <dd>@Model.Customer.VatNumber</dd>
-            <dt>Codice fiscale</dt>
-            <dd>@Model.Customer.NationalIdentificationNumber</dd>
-        </dl>
+    <div class="customer row">
+        <div class="col-xs-12 text-right">
+            <p>
+                <strong>@Model.Customer.Name</strong>
+            </p>
+            <address>
+                @Model.Customer.Address.Address<br />
+                @Model.Customer.Address.PostalCode, @Model.Customer.Address.City (@Model.Customer.Address.Province)
+            </address>
+            <dl class="dl-horizontal">
+                <dt>Partita IVA</dt>
+                <dd>@Model.Customer.VatNumber</dd>
+                <dt>Codice fiscale</dt>
+                <dd>@Model.Customer.NationalIdentificationNumber</dd>
+            </dl>
+        </div>
     </div>
-    <div class="invoice-info">
-        <dl>
-            <dt>Data di emissione</dt>
-            <dd>@Model.Date.ToString("dd/MM/yyyy")</dd>
-            <dt>Fattura numero</dt>
-            <dd>@Model.Number</dd>
-        </dl>
+    <div class="invoice-info row">
+        <div class="col-xs-12">
+            <dl class="row">
+                <dt class="col-xs-2">Data di emissione</dt>
+                <dd class="col-xs-10">@Model.Date.ToString("dd/MM/yyyy")</dd>
+                <dt class="col-xs-2">Fattura numero</dt>
+                <dd class="col-xs-10">@Model.Number</dd>
+            </dl>
+        </div>
     </div>
-    <table class="line-items">
-        <thead>
-            <tr>
-                <th>Cod.</th>
-                <th>Descrizione</th>
-                <th>Q.ta</th>
-                <th>Prezzo unitario</th>
-                <th>Prezzo totale</th>
-                <th>Tasse</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var lineItem in Model.LineItems)
-            {
-            <tr>
-                <td>@lineItem.Code</td>
-                <td>@lineItem.Description</td>
-                <td>@lineItem.Quantity</td>
-                <td>@lineItem.UnitPrice</td>
-                <td>@lineItem.TotalPrice</td>
-                <td>@lineItem.Vat %</td>
-            </tr>
-            }
-        </tbody>
-    </table>
+    <div class="row line-items">
+        <div class="col-xs-12">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Cod.</th>
+                        <th>Descrizione</th>
+                        <th>Q.ta</th>
+                        <th class="text-right">Prezzo unitario</th>
+                        <th class="text-right">Prezzo totale</th>
+                        <th class="text-right">Tasse</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var lineItem in Model.LineItems)
+                    {
+                        <tr>
+                            <td>@lineItem.Code</td>
+                            <td>@lineItem.Description</td>
+                            <td>@lineItem.Quantity</td>
+                            <td class="text-right">@Model.Currency @lineItem.UnitPrice.ToString("F2")</td>
+                            <td class="text-right">@Model.Currency @lineItem.TotalPrice.ToString("F2")</td>
+                            <td class="text-right">@lineItem.Vat %</td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4">&nbsp;</td>
+                        <td class="text-right"><strong>Imponibile</strong></td>
+                        <td class="text-right">@Model.Currency @Model.TaxableAmount.ToString("F2")</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">&nbsp;</td>
+                        <td class="text-right"><strong>Tasse</strong></td>
+                        <td class="text-right">@Model.Currency @Model.Taxes.ToString("F2")</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">&nbsp;</td>
+                        <td class="text-right"><strong>Totale</strong></td>
+                        <td class="text-right">@Model.Currency @Model.TotalPrice.ToString("F2")</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
 </body>
 </html>

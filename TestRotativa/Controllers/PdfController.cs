@@ -35,22 +35,22 @@ namespace TestRotativa.Controllers
                 {
                     Address = new InvoiceViewModel.AddressDescriptor
                     {
-                        Address = "via Torino 51",
-                        City = "Milano",
-                        PostalCode = "20123",
-                        Province = "MI"
+                        Address = "via di Prova 123",
+                        City = "Brescia",
+                        PostalCode = "25100",
+                        Province = "BS"
                     },
-                    Name = "Managed Designs srl",
-                    NationalIdentificationNumber = "04358780965",
-                    VatNumber = "IT04358780965"
+                    Name = "UnCliente srl",
+                    NationalIdentificationNumber = "12345678900",
+                    VatNumber = "IT12345678900"
                 },
                 Date = DateTime.Today,
                 LineItems = new InvoiceViewModel.LineItem[]
                 {
                     new InvoiceViewModel.LineItem
                     {
-                        Code = "MD001",
-                        Description = "Attività di consulenza e sviluppo per il progetto Merp",
+                        Code = "CL001",
+                        Description = "Attività di consulenza e sviluppo per un progetto a caso",
                         Quantity = 1,
                         UnitPrice = 3000,
                         TotalPrice = 3000,
