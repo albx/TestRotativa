@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestRotativa", "TestRotativ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestRotativa.Acl", "TestRotativa.Acl\TestRotativa.Acl.csproj", "{5F1332E4-7C8A-44D4-8DA5-88B98679D876}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestRotativa.Acl.Tests", "TestRotativa.Acl.Tests\TestRotativa.Acl.Tests.csproj", "{D90029E7-6E75-4091-8C28-B2850FAD8572}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{5F1332E4-7C8A-44D4-8DA5-88B98679D876}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F1332E4-7C8A-44D4-8DA5-88B98679D876}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F1332E4-7C8A-44D4-8DA5-88B98679D876}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D90029E7-6E75-4091-8C28-B2850FAD8572}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D90029E7-6E75-4091-8C28-B2850FAD8572}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D90029E7-6E75-4091-8C28-B2850FAD8572}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D90029E7-6E75-4091-8C28-B2850FAD8572}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

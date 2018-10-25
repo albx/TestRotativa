@@ -12,11 +12,26 @@ namespace TestRotativa.Acl
     {
         public RotativaPdfPrinter(IHostingEnvironment environment)
         {
+            if (environment == null)
+            {
+                throw new ArgumentNullException(nameof(environment));
+            }
+
             RotativaConfiguration.Setup(environment);
         }
 
         public Task<byte[]> PrintPdf(ActionContext context, string viewName, object model)
         {
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
+            if (string.IsNullOrWhiteSpace(viewName))
+            {
+                throw new ArgumentException("The view name cannot be empty", nameof(viewName));
+            }
+
             var view = new ViewAsPdf(
                 viewName: viewName, 
                 model: model);

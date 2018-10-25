@@ -21,7 +21,7 @@ namespace TestRotativa.Controllers
         public async Task<IActionResult> Invoice()
         {
             var viewModel = BuildInvoiceViewModel();
-            var fileContents = await _pdfPrinter.PrintPdf(ControllerContext, "Invoice", viewModel);
+            var fileContents = await _pdfPrinter.PrintPdf(ControllerContext, nameof(Invoice), viewModel);
 
             return File(fileContents, "application/pdf");
         }
